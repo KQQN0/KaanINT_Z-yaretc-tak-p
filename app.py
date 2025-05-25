@@ -4,17 +4,16 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 import json
 
-# Flask uygulaması oluşturma
-app = Flask(__name__)
-# Güvenlik için gizli bir anahtar belirle. Bu çok önemli!
-# Gerçek bir uygulamada rastgele, uzun ve karmaşık bir dize olmalıdır.
-app.secret_key = 'senin_cok_gizli_anahtarin_buraya_gelecek_ve_cok_uzun_olmali' 
 
-DATABASE = 'otel_yonetim.db' # Veritabanı dosyasının adı
+app = Flask(__name__)
+
+app.secret_key = 'kaan123456' 
+
+DATABASE = 'otel_yonetim.db' 
 
 def get_db():
     conn = sqlite3.connect(DATABASE)
-    conn.row_factory = sqlite3.Row # Sütun isimleriyle erişim için
+    conn.row_factory = sqlite3.Row 
     return conn
 
 def init_db():
@@ -37,7 +36,7 @@ def init_db():
             )
         ''')
 
-        # Kullanıcılar tablosu (Giriş/Kayıt için)
+       
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS users (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -48,7 +47,7 @@ def init_db():
         db.commit()
         db.close()
 
-# Oturum kontrolü için decorator
+
 def login_required(f):
     from functools import wraps
     @wraps(f)
@@ -59,7 +58,7 @@ def login_required(f):
         return f(*args, *kwargs)
     return decorated_function
 
-# --- Rota Tanımlamaları ---
+
 
 @app.route('/', methods=['GET'])
 def giris_formu():
@@ -143,7 +142,7 @@ def kayit():
     db = get_db()
     cursor = db.cursor()
 
-    if misafir_id: # Düzenleme işlemi
+    if misafir_id: 
         cursor.execute('''
             UPDATE misafirler SET 
             ad=?, soyad=?, tc_pasaport_no=?, telefon=?, email=?, 
