@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ziyaretçi Yoğunluk Rapor</title>
+    <link rel="stylesheet" type="text/css" href="/static/yogunluk.css">
+</head>
+<body>
+    <div class="geri-button-container">
+        <button class="geri-button" onclick="goBack()">Geri</button>
+    </div>
+
+    <script>
+        function goBack() {
+          window.history.back();
+        }
+    </script>
+
+    <div class="yogunluk-icerik">
+        <h2 class="yogunluk-baslik">Ziyaretçi Yoğunluk Analizi</h2>
+        
+        <h3>Günlük Yoğunluk</h3>
+        <table class="yogunluk-tablosu">
+            <thead>
+                <tr>
+                    <th>Tarih</th>
+                    <th>Sayi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for satir in gunluk_yogunluk %}
+                <tr>
+                    <td>{{ satir.tarih }}</td>
+                    <td>{{ satir.sayi }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="2">Günlük yoğunluk verisi bulunamadı.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h3>Haftalık Yoğunluk</h3>
+        <table class="yogunluk-tablosu">
+            <thead>
+                <tr>
+                    <th>Hafta (Yıl-Hafta Numarası)</th>
+                    <th>Sayi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for satir in haftalik_yogunluk %}
+                <tr>
+                    <td>{{ satir.hafta }}</td>
+                    <td>{{ satir.sayi }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="2">Haftalık yoğunluk verisi bulunamadı.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h3>Aylık Yoğunluk</h3>
+        <table class="yogunluk-tablosu">
+            <thead>
+                <tr>
+                    <th>Ay (Yıl-Ay)</th>
+                    <th>Sayi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for satir in aylik_yogunluk %}
+                <tr>
+                    <td>{{ satir.ay }}</td>
+                    <td>{{ satir.sayi }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="2">Aylık yoğunluk verisi bulunamadı.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

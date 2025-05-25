@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Misafir Kayıtları - Otel Yönetim Sistemi</title>
+    <link rel="stylesheet" type="text/css" href="/static/kayıtlar.css">
+</head>
+<body>
+    <div class="geri-button-container">
+        <button class="geri-button" onclick="goBack()">Geri</button>
+    </div>
+
+    <script>
+        function goBack() {
+          window.history.back();
+        }
+    </script>
+    <div class="kayit-listesi">
+        <h2>Otel Misafir Kayıtları</h2>
+        <table class="kayit-tablosu">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Ad Soyad</th>
+                    <th>TC/Pasaport No</th>
+                    <th>Telefon</th>
+                    <th>E-posta</th>
+                    <th>Giriş Tarihi</th>
+                    <th>Çıkış Tarihi</th>
+                    <th>Oda No</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if ziyaretciler %}
+                    {% for misafir in ziyaretciler %}
+                    <tr>
+                        <td>{{ misafir.id }}</td>
+                        <td>{{ misafir.ad }} {{ misafir.soyad }}</td>
+                        <td>{{ misafir.tc_pasaport_no }}</td>
+                        <td>{{ misafir.telefon }}</td>
+                        <td>{{ misafir.email }}</td>
+                        <td>{{ misafir.giris_tarihi_saati }}</td>
+                        <td>{{ misafir.cikis_tarihi_saati }}</td>
+                        <td>{{ misafir.oda_no }}</td>
+                        <td class="duzenle-sil-alan">
+    <a href="{{ url_for('duzenle_ziyaretci', misafir_id=misafir.id) }}">Düzenle</a>
+    <form action="{{ url_for('sil_ziyaretci', misafir_id=misafir.id) }}" method="POST" style="display:inline;">
+        <button type="submit" class="sil" onclick="return confirm('Bu kaydı silmek istediğinize emin misiniz?');">Sil</button>
+    </form>
+</td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="9">Henüz hiç misafir kaydı bulunmamaktadır.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+        <p><em>Not: Bu liste geçici olarak hafızadaki verileri göstermektedir. Veritabanı entegrasyonu sonrası kalıcı hale gelecektir.</em></p>
+    </div>
+</body>
+</html>

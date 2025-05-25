@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Otel Yönetim Sistemi - Giriş</title>
+    <link rel="stylesheet" type="text/css" href="/static/index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+    <div class="giris-kutusu">
+        <h2>Otel Yönetim Sistemi</h2>
+        <h3>Giriş Yap</h3>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}" role="alert">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form action="/giris" method="POST">
+            <div class="form-alani">
+                <label for="kullanici_adi">Kullanıcı Adı:</label>
+                <input type="text" id="kullanici_adi" name="kullanici_adi" required>
+            </div>
+            <div class="form-alani">
+                <label for="sifre">Şifre:</label>
+                <input type="password" id="sifre" name="sifre" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Oturum Aç</button>
+            <div class="alt-secenekler">
+                <p>Hesabın yok mu? <a href="{{ url_for('kayit_ol') }}">Şimdi Kayıt Ol</a></p>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

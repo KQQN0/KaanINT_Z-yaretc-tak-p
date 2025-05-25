@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Misafir Kayıt - Otel Yönetim Sistemi</title>
+    <link rel="stylesheet" type="text/css" href="/static/ziyaretci-kayıt.css">
+</head>
+<body>
+
+    <div class="geri-button-container">
+        <button class="geri-button" onclick="goBack()">Geri</button>
+    </div>
+
+    <script>
+        function goBack() {
+          window.history.back();
+        }
+    </script>
+
+    <div class="kayit-formu">
+        <h2>{% if misafir %}Misafir Bilgilerini Düzenle{% else %}Yeni Misafir Kaydı{% endif %}</h2>
+        <form method="POST" action="{{ url_for('kayit') }}">
+            {% if misafir %}
+            <input type="hidden" name="misafir_id" value="{{ misafir.id }}">
+            {% endif %}
+            
+            <div class="form-grup">
+                <label for="ad">Ad:</label>
+                <input type="text" id="ad" name="ad" value="{{ misafir.ad if misafir else '' }}" required>
+            </div>
+            <div class="form-grup">
+                <label for="soyad">Soyad:</label>
+                <input type="text" id="soyad" name="soyad" value="{{ misafir.soyad if misafir else '' }}" required>
+            </div>
+            <div class="form-grup">
+                <label for="tc_pasaport_no">TC Kimlik/Pasaport No:</label>
+                <input type="text" id="tc_pasaport_no" name="tc_pasaport_no" value="{{ misafir.tc_pasaport_no if misafir else '' }}">
+            </div>
+            <div class="form-grup">
+                <label for="telefon">Telefon:</label>
+                <input type="tel" id="telefon" name="telefon" value="{{ misafir.telefon if misafir else '' }}">
+            </div>
+            <div class="form-grup">
+                <label for="email">E-posta:</label>
+                <input type="email" id="email" name="email" value="{{ misafir.email if misafir else '' }}">
+            </div>
+            <div class="form-grup">
+                <label for="giris_tarihi">Giriş Tarihi ve Saati:</label>
+                <input type="datetime-local" id="giris_tarihi" name="ziyaret_tarihi" value="{{ misafir.giris_tarihi_saati if misafir else '' }}" required>
+            </div>
+            <div class="form-grup">
+                <label for="cikis_tarihi">Çıkış Tarihi ve Saati:</label>
+                <input type="datetime-local" id="cikis_tarihi" name="cikis_tarihi" value="{{ misafir.cikis_tarihi_saati if misafir else '' }}">
+            </div>
+            <div class="form-grup">
+                <label for="oda_no">Oda No:</label>
+                <input type="text" id="oda_no" name="oda_no" value="{{ misafir.oda_no if misafir else '' }}">
+            </div>
+            
+            <button type="submit">{% if misafir %}Güncelle{% else %}Kaydet{% endif %}</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ziyaretçi Yönetim Paneli</title>
+    <link rel="stylesheet" href="/static/anakayıtlar.css">
+</head>
+<body>
+
+    <div class="cikis-container">
+        <a href="{{ url_for('cikis_yap') }}" class="cikis-link">Çıkış</a> {# url_for ile düzeltildi #}
+    </div>
+
+
+    <div class="container">
+        <div class="module">
+            <a href="{{ url_for('ziyaretci_kayit_sayfasi') }}"> {# url_for ile düzeltildi #}
+                <img src="https://unisoftds.com/wp-content/uploads/2023/03/personel-takibi.png" alt="Ziyaretçi Kayıt">
+                <span>Ziyaretçi Kayıt</span>
+                <p>Yeni ziyaretçilerin kaydını buradan yapabilirsiniz.</p>
+            </a>
+        </div>
+        <div class="module">
+            <a href="{{ url_for('kayitlar_sayfasi') }}"> {# url_for ile düzeltildi #}
+                <img src="https://unisoftds.com/wp-content/uploads/2023/03/personel-takibi.png" alt="Ziyaretçi Kayıt Rapor">
+                <span>Ziyaretçi Kayıt Rapor</span>
+                <p>Ziyaretçi kayıtlarının detaylı raporunu görüntüleyin.</p>
+            </a>
+        </div>
+        <div class="module">
+            <a href="{{ url_for('ziyaretci_filtreleme_sayfasi') }}"> {# url_for ile düzeltildi #}
+                <img src="https://unisoftds.com/wp-content/uploads/2023/03/personel-takibi.png" alt="Ziyaretçi Filtreleme">
+                <span>Ziyaretçi Filtreleme</span>
+                <p>Ziyaretçileri çeşitli kriterlere göre filtreleyin.</p>
+            </a>
+        </div>
+        <div class="module">
+            <a href="{{ url_for('ziyaretci_yogunluk_sayfasi') }}"> {# url_for ile düzeltildi #}
+                <img src="https://unisoftds.com/wp-content/uploads/2023/03/personel-takibi.png" alt="Ziyaretçi Yoğunluk">
+                <span>Ziyaretçi Yoğunluk</span>
+                <p>Ziyaretçi yoğunluk analizlerini görüntüleyin.</p>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
